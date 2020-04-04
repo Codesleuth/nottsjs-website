@@ -5,17 +5,17 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 // import Header from './header'
-import LeftContent from '../components/left-content'
-import Declaration from '../components/declaration'
-import HelpOut from '../components/help-out'
-import Footer from '../components/footer'
-import Scripts from '../components/scripts'
+import LeftContent from './left-content'
+import Declaration from './declaration'
+import HelpOut from './help-out'
+import Footer from './footer'
+import Scripts from './scripts'
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <main>
       <div className="container">

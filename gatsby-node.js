@@ -11,7 +11,7 @@ const path = require(`path`)
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const eventsTemplate = path.resolve(`src/templates/event-template.jsx`)
+  const eventsTemplate = path.resolve(`src/templates/event-template.tsx`)
 
   const result = await graphql(`
     {

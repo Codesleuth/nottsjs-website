@@ -7,7 +7,33 @@ import EventCard from '../components/event-card'
 
 import { transformEvent } from '../utils/transforms'
 
-export default function PastEventsPage ({ data }) {
+type PastEventsPageProps = {
+  data: {
+    allMarkdownRemark: {
+      nodes: {
+        html: string
+        frontmatter: {
+          path: string
+          title: string
+          start: string
+          end: string
+          meetup_url: string
+          presenter: string
+          presenter_bio: string
+          presenter_img: string
+          presenter_url: string
+          github_url: string
+          twitter_url: string
+        }
+        fields: {
+          presenter_bio_html: string
+        }
+      }[]
+    }
+  }
+}
+
+export default function PastEventsPage ({ data }: PastEventsPageProps) {
   const events = data.allMarkdownRemark.nodes.map(node  => transformEvent(node))
   return (
     <Layout>

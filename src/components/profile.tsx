@@ -1,6 +1,15 @@
 import React from 'react'
 
-const Profile = ({ name, bio, img, url, githubUrl, twitterUrl }) => (
+type ProfileProps = {
+  name: string
+  bio: string
+  img: string
+  url: string
+  githubUrl: string
+  twitterUrl: string
+}
+
+const Profile = ({ name, bio, img, url, githubUrl, twitterUrl }: ProfileProps) => (
   <div className="row profile">
     <div className="col s12 m4 l3">
       <div className="row">

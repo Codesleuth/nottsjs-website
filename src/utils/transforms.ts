@@ -1,9 +1,9 @@
-type Presenter = {
-  presenter: string
-  presenter_img: string
-  presenter_url: string
-  github_url: string
-  twitter_url: string
+type PresenterData = {
+  presenter?: string
+  presenter_img?: string
+  presenter_url?: string
+  github_url?: string
+  twitter_url?: string
 }
 
 function transformPresenter ({
@@ -12,7 +12,7 @@ function transformPresenter ({
   presenter_url,
   github_url,
   twitter_url
-}: Presenter, presenter_bio_html: string) {
+}: PresenterData, presenter_bio_html: string) {
   return presenter ? ({
     name: presenter,
     bio: presenter_bio_html,
@@ -22,6 +22,8 @@ function transformPresenter ({
     twitterUrl: twitter_url
   }) : undefined
 }
+
+export type Presenter = ReturnType<typeof transformPresenter>
 
 const suffixes: Record<string, string> = {
   one: 'st',
@@ -69,7 +71,7 @@ type EventNode = {
     start: string
     end: string
     meetup_url: string
-  } & Presenter
+  } & PresenterData
   fields: any
 }
 
@@ -91,6 +93,8 @@ export function transformEvent(eventNode: EventNode) {
     html,
     path,
     title,
+    start,
+    end,
     date,
     dateAndTime,
     hasPast,
@@ -103,3 +107,5 @@ export function transformEvent(eventNode: EventNode) {
     ),
   }
 }
+
+export type Event = ReturnType<typeof transformEvent>

@@ -1,10 +1,20 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import Profile from './profile'
+import {Event} from '../utils/transforms'
 
 import './event-card.css'
 
-export default function EventCard({ event: { html, path, title, dateAndTime, hasPast, meetupUrl, presenter }, disableTitleLink }) {
+type EventCardProps = {
+  event: Event,
+  disableTitleLink?: boolean
+}
+
+export default function EventCard(props: EventCardProps) {
+  const {
+    event: { html, path, title, dateAndTime, hasPast, meetupUrl, presenter },
+    disableTitleLink
+  } = props
   return (
     <div className="row">
     <div className="col s12">

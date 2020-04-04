@@ -7,7 +7,29 @@ import EventCard from '../components/event-card'
 
 import { transformEvent } from '../utils/transforms'
 
-export default function EventTemplate({ data }) {
+type EventTemplateProps = {
+  data: {
+    markdownRemark: {
+      html: string
+      frontmatter: {
+        path: string
+        title: string
+        start: string
+        end: string
+        meetup_url: string
+        presenter: string
+        presenter_bio: string
+        presenter_img: string
+        presenter_url: string
+      }
+      fields: {
+        presenter_bio_html: string
+      }
+    }
+  }
+}
+
+export default function EventTemplate({ data }: EventTemplateProps) {
   const event = transformEvent(data.markdownRemark)
   return (
     <Layout>

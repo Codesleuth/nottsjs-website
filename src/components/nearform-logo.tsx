@@ -2,12 +2,12 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-const Logo = ({ className }) => {
+const NearformLogo = ({ className }: { className: string }) => {
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "logo.png" }) {
+      placeholderImage: file(relativePath: { eq: "nflogo.png" }) {
         childImageSharp {
-          fluid(maxWidth: 304, maxHeight: 304) {
+          fluid(maxWidth: 192) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -18,4 +18,4 @@ const Logo = ({ className }) => {
   return <Img className={className} fluid={data.placeholderImage.childImageSharp.fluid} />
 }
 
-export default Logo
+export default NearformLogo

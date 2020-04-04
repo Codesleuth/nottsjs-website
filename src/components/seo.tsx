@@ -12,7 +12,14 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 import './style.css'
 
-function SEO({ description, lang, meta, title }) {
+type SEOProps = {
+  description?: string
+  lang?: string
+  meta?: JSX.IntrinsicElements['meta'][]
+  title?: string
+}
+
+function SEO({ description, lang, meta = [], title }: SEOProps) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -75,7 +82,8 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:image`,
           content: `${site.siteMetadata.url}${site.siteMetadata.image}`,
         },
-      ].concat(meta)}
+        ...meta
+      ]}
     >
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"></link>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
