@@ -14,12 +14,9 @@ interface IndexPageProps {
         html: string
         frontmatter: {
           path: string
-          date: string
           title: string
           start: string
-          startTime: string
           end: string
-          endTime: string
           meetup_url: string
           presenter: string
           presenter_bio: string
@@ -37,14 +34,20 @@ interface IndexPageProps {
 }
 
 export default function IndexPage ({ data }: IndexPageProps) {
-  const event = transformEvent(data.allMarkdownRemark.nodes)
+  const eventNode = data.allMarkdownRemark.nodes[0]
+  const event = transformEvent(eventNode)
+
+  const timeFormat = new Intl.DateTimeFormat('en-GB', { hour: 'numeric', minute: 'numeric', hour12: false })
+  const startTime = timeFormat.format(new Date(eventNode.frontmatter.start))
+  const endTime = timeFormat.format(new Date(eventNode.frontmatter.end))
+
   return (
     <Layout>
       <SEO title='Home' />
       <div className="row">
         <div className="col s12">
           <h3 className="header">Next event: {event.date}</h3>
-          <h5 className="header light">{event.startTime} to {event.endTime}</h5>
+          <h5 className="header light">{startTime} to {endTime}</h5>
         </div>
       </div>
 
@@ -70,12 +73,9 @@ export const query = graphql`
         html
         frontmatter {
           path
-          date: start(formatString: "dddd, MMMM Do, YYYY")
           title
           start
-          startTime: start(formatString: "HH:mm")
           end
-          endTime: end(formatString: "HH:mm")
           meetup_url
           presenter
           presenter_bio
